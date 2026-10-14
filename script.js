@@ -9,6 +9,17 @@ const itemCounter = document.querySelector("#item-counter");
 
 const tasks = [];
 
+function render(todoText) {
+
+    let taskLi = document.createElement("li")
+    let removeTask = document.createElement("button")
+    removeTask.id = "remove-task"
+    removeTask.textContent = "X"
+    taskLi.textContent = `${todoText}`
+    taskList.appendChild(taskLi)
+    taskLi.appendChild(removeTask);
+}
+
 todoForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -21,4 +32,6 @@ todoForm.addEventListener("submit", function(event) {
 
     let taskObject = {task: todoText}
     tasks.push(taskObject);
+    render(todoText)
+
 });
