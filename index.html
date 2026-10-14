@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./script.js"></script>
     <title>To do app</title>
 </head>
+
 <body>
-    <h1>My To-do app</h1>
-    <form id="todo-form"></form>
-        <input type="text" name="" 
-        id="todo-input" 
-        placeholder="Add a new task..."
-        autocomplete="off" required>
+    <header>
+        <h1 id="head-title">My To-do app</h1>
+    </header>
 
-        <button type="submit" id="add-btn">+</button>
+    <main>
+        <form id="todo-form">
+            <label for="todo-input">New task</label>
+            <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off" required>
 
+            <button type="submit" id="add-btn">+</button>
+        </form>
 
+        <p id="error-text"></p>
+
+        <ul id="task-list"></ul>
+    </main>
+
+    <footer id="item-counter"></footer>
 </body>
-</html> 
+
+</html>
