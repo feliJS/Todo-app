@@ -29,8 +29,12 @@ header {
     justify-content: center;
 }
 
-.done {
+#task-list li.done span {
     text-decoration: line-through;
+}
+
+#task-list li.done{
+    opacity: 60%;
 }
 
 main {
