@@ -15,7 +15,11 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## ☕ About The Website
+## ☕ About This Project
+
+This project originally started as a two-day mini-project during my Fullstack Development studies.
+
+The initial version was developed collaboratively, while all further development in this fork is my own work.
 
 Link to repository: https://github.com/miladinho10/To-do-list-app 
 <br />
