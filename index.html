@@ -15,20 +15,23 @@
     </header>
 
     <main>
-        <form id="todo-form">
-            <label for="todo-input">New task</label>
-            <div id="input-add-section">
-            <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off" required>
-            <button type="submit" id="add-btn">add</button>
+        <div id="side">
+            <form id="todo-form">
+                <label for="todo-input">New task</label>
+                <div id="input-add-section">
+                <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off" required>
+                <button type="submit" id="add-btn">add</button>
+                </div>
+            </form>
+            <div id="filter">
+                <button id="all-tasks">All</button>
+                <button id="active-tasks">Active</button>
+                <button id="done-tasks">Done</button>
+                <button id="clear-done">Clear done</button>
             </div>
-        </form>
-        <div id="filter">
-            <button id="all-tasks">All</button>
-            <button id="active-tasks">Active</button>
-            <button id="done-tasks">Done</button>
-            <button id="clear-done">Clear done</button>
+            <p id="error-text"></p>
         </div>
-        <p id="error-text"></p>
+
 
         <ul id="task-list"></ul>
     </main>
