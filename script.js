@@ -108,3 +108,13 @@ document.getElementById("done-tasks").addEventListener("click", function() {
     currentFilter = "done";
     render();
 });
+
+document.getElementById("clear-done").addEventListener("click", function() {
+    for (let i = tasks.length - 1; i >= 0; i--) {
+        if (tasks[i].done === true) {
+            tasks.splice(i, 1);
+    }
+    }
+    save();
+    render();
+});
