@@ -32,6 +32,7 @@ function render() {
 
             const taskLi = document.createElement("li");
             const removeBtn = document.createElement("button");
+            const doneBtn = document.createElement("button");
 
             taskLi.textContent = tasks[i].todo;
 
@@ -40,6 +41,7 @@ function render() {
             }
 
             removeBtn.textContent = "X";
+            doneBtn.textContent = tasks[i].done ? "Undo" : "Done";
 
             removeBtn.addEventListener("click", function() {
                 tasks.splice(i, 1);
@@ -47,7 +49,7 @@ function render() {
                 render();
             });
 
-            taskLi.addEventListener("click", function() {
+            doneBtn.addEventListener("click", function() {
                 if (tasks[i] === undefined) {
                     return;
                 }
@@ -62,6 +64,7 @@ function render() {
                 render();
             });
 
+            taskLi.appendChild(doneBtn);
             taskLi.appendChild(removeBtn);
             taskList.appendChild(taskLi);
         }
