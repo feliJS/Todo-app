@@ -1,80 +1,110 @@
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
-
 const errorText = document.querySelector("#error-text");
-
 const taskList = document.querySelector("#task-list");
-
 const itemCounter = document.querySelector("#item-counter");
 
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-
+let currentFilter = "all";
 let doneTasks = 0;
-render()
-function save(){
+
+render();
+
+function save() {
     let tasksJson = JSON.stringify(tasks);
     localStorage.setItem("tasks", tasksJson);
-
 }
-
 
 function render() {
-    taskList.textContent = ""
+    taskList.textContent = "";
+    doneTasks = 0;
 
     for (let i = 0; i < tasks.length; i++) {
-        const taskLi = document.createElement("li");
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "X";
-        removeBtn.addEventListener("click", function () {
-            tasks.splice(i, 1)
-            taskLi.remove();
-            save();
-                    itemCounter.textContent = `${doneTasks}/${tasks.length}`;
 
-        });
+        if (tasks[i].done === true) {
+            doneTasks++;
+        }
+        // nedan sorterar ut allt som är klart eller aktiva, beroende på currentFilter 
+        if (currentFilter === "all" ||
+            currentFilter === "active" && tasks[i].done === false ||
+            currentFilter === "done" && tasks[i].done === true) {
 
-        taskLi.addEventListener("click", function(){
-            taskLi.classList.toggle("done");
-            if (taskLi.classList.contains("done")) {
-                tasks[i].done = true;
-                doneTasks++;
-                save();
-            } else {
-                tasks[i].done = false;
-                doneTasks--;
-                save();
+            const taskLi = document.createElement("li");
+            const removeBtn = document.createElement("button");
+
+            taskLi.textContent = tasks[i].todo;
+
+            if (tasks[i].done === true) {
+                taskLi.classList.add("done");
             }
-            
-                    itemCounter.textContent = `${doneTasks}/${tasks.length}`;
 
-        })
+            removeBtn.textContent = "X";
 
-        taskLi.textContent = tasks[i].todo
-        taskLi.appendChild(removeBtn)
-        taskList.appendChild(taskLi)
-        itemCounter.textContent = `${doneTasks}/${tasks.length}`;
+            removeBtn.addEventListener("click", function() {
+                tasks.splice(i, 1);
+                save();
+                render();
+            });
+
+            taskLi.addEventListener("click", function() {
+                if (tasks[i] === undefined) {
+                    return;
+                }
+
+                if (tasks[i].done === false) {
+                    tasks[i].done = true;
+                } else {
+                    tasks[i].done = false;
+                }
+
+                save();
+                render();
+            });
+
+            taskLi.appendChild(removeBtn);
+            taskList.appendChild(taskLi);
+        }
     }
-    
+
+    itemCounter.textContent = `${doneTasks}/${tasks.length}`;
 }
 
-todoForm.addEventListener("submit", function (event) {
+todoForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-        const todoText = todoInput.value.trim();
+    const todoText = todoInput.value.trim();
 
-        if (todoText === "" || todoText === " ") {
+    if (todoText === "") {
         errorText.textContent = "Please enter a task!";
-         return;
+        return;
     }
+
+    errorText.textContent = "";
 
     const itemObj = {
-        todo: todoInput.value,
+        todo: todoText,
         done: false
-    }
+    };
 
-    tasks.push(itemObj)
+    tasks.push(itemObj);
     save();
-    render()
+    render();
 
+    todoInput.value = "";
+});
+
+document.getElementById("all-tasks").addEventListener("click", function() {
+    currentFilter = "all";
+    render();
+});
+
+document.getElementById("active-tasks").addEventListener("click", function() {
+    currentFilter = "active";
+    render();
+});
+
+document.getElementById("done-tasks").addEventListener("click", function() {
+    currentFilter = "done";
+    render();
 });
