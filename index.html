@@ -17,15 +17,17 @@
     <main>
         <form id="todo-form">
             <label for="todo-input">New task</label>
+            <div id="input-add-section">
             <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off" required>
-
-            <button type="submit" id="add-btn">+</button>
+            <button type="submit" id="add-btn">add</button>
+            </div>
         </form>
-        <button id="all-tasks">All</button>
-        <button id="active-tasks">Active</button>
-        <button id="done-tasks">Done</button>
-        <button id="clear-done">Clear done</button>
-
+        <div id="filter">
+            <button id="all-tasks">All</button>
+            <button id="active-tasks">Active</button>
+            <button id="done-tasks">Done</button>
+            <button id="clear-done">Clear done</button>
+        </div>
         <p id="error-text"></p>
 
         <ul id="task-list"></ul>

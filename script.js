@@ -25,7 +25,7 @@ function render() {
         if (tasks[i].done === true) {
             doneTasks++;
         }
-        // nedan sorterar ut allt som är klart eller aktiva, beroende på currentFilter 
+
         if (currentFilter === "all" ||
             currentFilter === "active" && tasks[i].done === false ||
             currentFilter === "done" && tasks[i].done === true) {
@@ -33,8 +33,10 @@ function render() {
             const taskLi = document.createElement("li");
             const removeBtn = document.createElement("button");
             const doneBtn = document.createElement("button");
+            const taskText = document.createElement("span");
 
-            taskLi.textContent = tasks[i].todo;
+            taskText.textContent = tasks[i].todo;
+            
 
             if (tasks[i].done === true) {
                 taskLi.classList.add("done");
@@ -43,12 +45,34 @@ function render() {
             removeBtn.textContent = "X";
             doneBtn.textContent = tasks[i].done ? "Undo" : "Done";
 
+            
+            taskText.addEventListener("click", function() { //dubbel klick? hur
+                const editInput = document.createElement("input");
+
+                editInput.value = tasks[i].todo;
+
+                taskText.textContent = "";
+                taskText.appendChild(editInput);
+                editInput.focus(); //fokus på input 
+
+                editInput.addEventListener("keydown", function(event) {
+                    if (event.key === "Enter") {
+                        tasks[i].todo = editInput.value.trim();
+                        save();
+
+                        render();
+                    }
+                });
+            });
+
+            
             removeBtn.addEventListener("click", function() {
                 tasks.splice(i, 1);
                 save();
                 render();
             });
 
+            
             doneBtn.addEventListener("click", function() {
                 if (tasks[i] === undefined) {
                     return;
@@ -65,6 +89,7 @@ function render() {
             });
 
             taskLi.appendChild(doneBtn);
+            taskLi.appendChild(taskText);
             taskLi.appendChild(removeBtn);
             taskList.appendChild(taskLi);
         }
@@ -79,10 +104,12 @@ todoForm.addEventListener("submit", function(event) {
     const todoText = todoInput.value.trim();
 
     if (todoText === "") {
+        errorText.style.display = "block";
         errorText.textContent = "Please enter a task!";
         return;
     }
 
+    errorText.style.display = "none";
     errorText.textContent = "";
 
     const itemObj = {
@@ -116,8 +143,9 @@ document.getElementById("clear-done").addEventListener("click", function() {
     for (let i = tasks.length - 1; i >= 0; i--) {
         if (tasks[i].done === true) {
             tasks.splice(i, 1);
+        }
     }
-    }
+
     save();
     render();
 });

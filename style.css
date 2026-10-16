@@ -1,3 +1,106 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(233, 201, 165);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body button {
+    all: unset;
+    cursor: pointer;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: rgb(102, 71, 32);
+    color: rgb(252, 247, 233);
+    border-radius: 4px;
+    border: 2px solid rgb(177, 149, 105);
+}
+
+body button:hover {
+    background-color: rgb(150, 107, 55);
+}
+
+header {
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+}
+
 .done {
     text-decoration: line-through;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+    margin: 1rem 3rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form label {
+    font-size: 1rem;
+}
+
+#input-add-section {
+
+}
+
+#todo-input {
+    width: 50%;
+    padding: 1rem;
+    border: 1px dashed rgb(105, 76, 23);
+}
+
+#add-btn {
+    padding: 0.9rem 1.5rem;
+}
+
+#error-text {
+    display: none;
+}
+
+#task-list {
+    background-color: bisque;
+    border-radius: 4px;
+    border: 2px dashed rgb(105, 76, 23);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#task-list li {
+    all: unset;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(226, 189, 147);
+    padding: 0.5rem;
+}
+
+#task-list li span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+footer {
+    font-size: 30px;
+    width: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0rem;
 }
