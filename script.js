@@ -8,7 +8,15 @@ const taskList = document.querySelector("#task-list");
 const itemCounter = document.querySelector("#item-counter");
 
 const tasks = [];
+
 let doneTasks = 0;
+
+function save(){
+    let tasksJson = JSON.stringify(tasks);
+    localStorage.setItem("tasks", tasksJson);
+
+}
+
 
 function render() {
     taskList.textContent = ""
@@ -20,7 +28,7 @@ function render() {
         removeBtn.addEventListener("click", function () {
             tasks.splice(i, 1)
             taskLi.remove();
-            
+            save();
                     itemCounter.textContent = `${doneTasks}/${tasks.length}`;
 
         });
@@ -30,9 +38,11 @@ function render() {
             if (taskLi.classList.contains("done")) {
                 tasks[i].done = true;
                 doneTasks++;
+                save();
             } else {
                 tasks[i].done = false;
                 doneTasks--;
+                save();
             }
             
                     itemCounter.textContent = `${doneTasks}/${tasks.length}`;
@@ -63,7 +73,7 @@ todoForm.addEventListener("submit", function (event) {
     }
 
     tasks.push(itemObj)
-
+    save();
     render()
 
 });
