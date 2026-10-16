@@ -7,10 +7,11 @@ const taskList = document.querySelector("#task-list");
 
 const itemCounter = document.querySelector("#item-counter");
 
-const tasks = [];
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
 
 let doneTasks = 0;
-
+render()
 function save(){
     let tasksJson = JSON.stringify(tasks);
     localStorage.setItem("tasks", tasksJson);
